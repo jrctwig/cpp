@@ -15,7 +15,7 @@ void Server::Send(SOCKET writeSock){
 		if (":q" == (wBuff)) {
 			break;
 		}
-		send(writeSock, wBuff.c_str(), wBuff.length() + 1, 0); //sizeof??
+		send(writeSock, wBuff.c_str(), wBuff.length() + 1, 0); 
 	}
 }
 
@@ -33,7 +33,7 @@ void Server::Receive(SOCKET readSock) {
 
 		std::cout << buffer;
 
-		if (recBytes != sizeof(buffer) - 1) { //sizeof
+		if (recBytes != sizeof(buffer) - 1) { 
 			std::cout << "\n";
 		}
 	}
@@ -63,7 +63,7 @@ void Server::Start() {
 	SOCKET newsockfd = accept(socketfd, (SOCKADDR *)&cli_addr, 0);
 	if (newsockfd == -1) { std::cout << "Connection Failed\n"; }
 
-	std::thread rThread(&Server::Receive, this, newsockfd); //switch this
+	std::thread rThread(&Server::Receive, this, newsockfd);
 	
 	Send(newsockfd);
 

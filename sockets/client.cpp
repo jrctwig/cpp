@@ -18,7 +18,7 @@ void Client::Send(SOCKET writeSock) {
 			break;
 		}
 
-		send(writeSock, wBuff.c_str(), wBuff.length() + 1, 0); //remove +1
+		send(writeSock, wBuff.c_str(), wBuff.length() + 1, 0); 
 	}
 }
 
@@ -26,7 +26,7 @@ void Client::Receive(SOCKET readSock) {
 	char buffer[512] = { 0 };
 	int recBytes;
 
-	while (1) { //while n
+	while (1) { 
 		recBytes = recv(readSock, buffer, sizeof(buffer) - 1, 0);
 
 		if (recBytes <= 0) {
@@ -36,14 +36,14 @@ void Client::Receive(SOCKET readSock) {
 
 		std::cout << buffer;
 
-		if (recBytes != sizeof(buffer) - 1) { //sizeof
+		if (recBytes != sizeof(buffer) - 1) { 
 			std::cout << "\n";
 		}
 
 	}
 }
 
-void Client::Start() { //start
+void Client::Start() { 
 	WSADATA wsaData;
 	SOCKET mSocket;
 	SOCKADDR_IN target;
@@ -52,11 +52,11 @@ void Client::Start() { //start
 		std::cout << "WSAStartup failed.\n";
 	}
 
-	target.sin_family = AF_INET; // address family Internet
-	target.sin_port = htons(1337); //Port to connect on
-	target.sin_addr.s_addr = inet_addr(host.c_str()); //Target IP
+	target.sin_family = AF_INET; 
+	target.sin_port = htons(1337); 
+	target.sin_addr.s_addr = inet_addr(host.c_str()); 
 
-	mSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); //create socket //0
+	mSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); 
 	if (mSocket == -1) { std::cout << "::Socket Creation Failed" << std::endl; }
 
 	if(connect(mSocket, (SOCKADDR *)&target, sizeof(target)) == SOCKET_ERROR){
